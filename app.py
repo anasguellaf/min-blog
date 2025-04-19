@@ -12,31 +12,15 @@ class BaseModel(Model):
         
         
 class Category(BaseModel):
-    cat_list = [
-        ('art', 'ART'),
-        ('law', 'LAW'),
-        ('beauty', 'BEAUTY'),
-        ('ai', 'Artificial Intelegence'),
-        ('coding', 'Coding'),
-    ]
-    
-    name = CharField(unique=True, choices = cat_list)
+    name = CharField(unique=True)
     date_added = DateField(formats="%Y-%m-%d", default=datetime.now)
         
 class User(BaseModel):
-    
-    # Country list
-    countries = [
-        ('ma', 'Maroc'),
-        ('fr', 'France'),
-        ('es', 'Espagne'),
-    ]
-    
-    
+
     # Fields | Column | Champ
     username = CharField(unique=True)
     age = IntegerField()
-    country = CharField(choices = countries)
+    country = CharField()
     join_date = DateTimeField(formats="%Y-%m-%d %H:%M:%S", default=datetime.now)    
     
         
@@ -58,12 +42,26 @@ class Post(BaseModel):
 
 
 if __name__ == '__main__':
-    db.connect()
-    db.create_tables([User, Comment, Category, Post])
-
-    # Ajouter un nouvel utilisateur.
-    # new_user = User.create(username='ilyas2025')
-    # Ajouter un post lié à un utilisateur.
-    #abdo = User.get(User.username=='abdo007')
-    #new_post = Post.create(title='how to win friends in 20 minutes', content = 'a simple blog showing you how to get more friends in 20 minutes by Abdelali ', user=abdo)
+    #db.connect()
+    #db.create_tables([User, Comment, Category, Post])
+    
+    new_categories = [
+        'law',
+        'economics',
+        'coding',
+        'web',
+        'hacking',
+        'touristics',
+        'nature',
+        'education',
+        'marketing',
+        'banking'
+    ]
+    
+    for cat in new_categories: # loop
+        Category.create(
+        name = cat
+    )
+    
+    
     
